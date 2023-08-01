@@ -1,13 +1,13 @@
 import React, { ReactNode } from "react";
 
-interface ButtonBoxProps {
+interface ButtonsProps {
   children: ReactNode;
 }
 
-const ButtonBox: React.FC<ButtonBoxProps> = ({ children }) => {
+const Buttons: React.FC<ButtonsProps> = ({ children }) => {
   return (
     <div className="buttonBox">{children}</div>
   );
 }
 
-export default ButtonBox;
+export default Buttons;
