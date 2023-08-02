@@ -6,6 +6,8 @@ const Screen: React.FC = () => {
 
   return (
     <h1 className="screen" >
+      {calc.expression ? `${calc.expression} =` : calc.expression}
+      <br />
       {calc.num ? calc.num : calc.res}
     </h1>
   );

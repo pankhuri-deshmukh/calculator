@@ -5,6 +5,8 @@ interface ButtonProps {
   value: string | number;
 }
 
+//Record is Typescript utility for mapping ket-value pair
+//adds required style class to operation button
 const getStyle = (btn: string | number) => {
   const style: Record<string, string> = {
     '=': 'equals',
@@ -27,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({ value }) => {
   }
 
   const resetClick = () => {
-    setCalc({ sign: '', num: 0, res: 0 })
+    setCalc({ sign: '', num: 0, res: 0, expression: ''})
   }
 
   const handleClick = () => {
@@ -48,6 +50,7 @@ const Button: React.FC<ButtonProps> = ({ value }) => {
 
   const signClick = () => {
     setCalc({
+      ...calc,
       sign: value as string,
       res: !calc.res && calc.num ? calc.num : calc.res,
       num: 0
@@ -65,16 +68,20 @@ const Button: React.FC<ButtonProps> = ({ value }) => {
         }
         return result[sign](a, b);
       }
+
+      const newExpression = `${calc.res} ${calc.sign} ${calc.num}`
       setCalc({
         res: math(calc.res, calc.num, calc.sign),
         sign: '',
-        num: 0
+        num: 0,
+        expression: newExpression,
       })
     }
   }
 
   const perClick = () => {
     setCalc({
+      ...calc,
       num: (calc.num / 100),
       res: (calc.res / 100),
       sign: ''
@@ -83,6 +90,7 @@ const Button: React.FC<ButtonProps> = ({ value }) => {
 
   const invertClick = () => {
     setCalc({
+      ...calc,
       num: calc.num ? calc.num * -1 : 0,
       res: calc.res ? calc.res * -1 : 0,
       sign: ''
